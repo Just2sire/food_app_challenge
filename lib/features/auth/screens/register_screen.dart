@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/features/auth/widgets/register_enum.dart';
 import 'package:food_app/utils/build_context_extension.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+
+import '../widgets/register_user_info.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -15,13 +16,32 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _sexController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   RegisterSection _section = RegisterSection.userInfo;
+  bool checkboxValue = false;
+  void setCheckboxValue(bool value) {
+    setState(() {
+      checkboxValue = value;
+    });
+  }
+  void _validateForm() {
+    _formKey.currentState!.validate();
+  }
 
   @override
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
+    _dateController.dispose();
+    _sexController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -72,51 +92,52 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _section = RegisterSection.userPassword;
+                              _section = RegisterSection.userInfo;
                             });
                           },
-                          child: CircleAvatar(
-                            radius: 30,
-                            backgroundColor:
-                                _section == RegisterSection.userInfo
-                                    ? const Color(0xff363C32)
-                                    : Colors.white,
-                            child: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _section = RegisterSection.userPassword;
-                                });
-                              },
-                              icon: Icon(
-                                Icons.lock_open_outlined,
-                                size: 37,
-                                color: _section == RegisterSection.userInfo
-                                    ? Colors.white
-                                    : const Color(0xff363C32),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: const Color(0xff363C32),
+                                width: 3,
                               ),
+                              color: _section == RegisterSection.userInfo
+                                  ? const Color(0xff363C32)
+                                  : Colors.white,
+                            ),
+                            child: Icon(
+                              Icons.person_outline_outlined,
+                              size: 37,
+                              color: _section == RegisterSection.userInfo
+                                  ? Colors.white
+                                  : const Color(0xff363C32),
                             ),
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _section = RegisterSection.userInfo;
+                              _section = RegisterSection.userPassword;
                             });
                           },
-                          child: CircleAvatar(
-                            radius: 30,
-                            backgroundColor: const Color(0xff363C32),
-                            child: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _section = RegisterSection.userInfo;
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.person_outline_outlined,
-                                size: 37,
-                                color: Colors.white,
-                              ),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: const Color(0xff363C32), width: 3),
+                              color: _section == RegisterSection.userPassword
+                                  ? const Color(0xff363C32)
+                                  : Colors.white,
+                            ),
+                            child: Icon(
+                              Icons.lock_open_outlined,
+                              size: 37,
+                              color: _section == RegisterSection.userPassword
+                                  ? Colors.white
+                                  : const Color(0xff363C32),
                             ),
                           ),
                         ),
@@ -129,167 +150,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Form(
               key: _formKey,
               child: SizedBox(
-                height: context.height * 0.24,
+                height: context.height * 0.43,
                 child: ListView(
                   children: [
-                    Visibility(
-                      visible:
-                          _section == RegisterSection.userInfo ? true : false,
-                      child: SizedBox(
-                        height: context.height * 0.23,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            TextFormField(
-                              controller: _usernameController,
-                              validator: (value) {
-                                return null;
-                              },
-                              textAlign: TextAlign.start,
-                              textInputAction: TextInputAction.send,
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 15,
-                                ),
-                                prefixIcon: Icon(
-                                  Icons.person_outline_outlined,
-                                  size: 30,
-                                  color: Colors.grey,
-                                ),
-                                prefixStyle: TextStyle(),
-                                hintText: "Username",
-                                hintStyle: TextStyle(
-                                  height: 2,
-                                  color: Color(0xffDDDADA),
-                                  fontSize: 15,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  borderSide: BorderSide(),
-                                ),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: context.width * 0.45,
-                                  child: TextFormField(
-                                    controller: _passwordController,
-                                    validator: (value) {
-                                      return null;
-                                    },
-                                    textAlign: TextAlign.start,
-                                    textInputAction: TextInputAction.send,
-                                    decoration: const InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 15,
-                                      ),
-                                      prefixIcon: Icon(
-                                        Icons.calendar_month_outlined,
-                                        size: 30,
-                                        color: Colors.grey,
-                                      ),
-                                      hintText: "Date",
-                                      hintStyle: TextStyle(
-                                        height: 2,
-                                        color: Color(0xffDDDADA),
-                                        fontSize: 15,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
-                                        ),
-                                        borderSide: BorderSide(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.width * 0.45,
-                                  child: TextFormField(
-                                    controller: _passwordController,
-                                    validator: (value) {
-                                      return null;
-                                    },
-                                    textAlign: TextAlign.start,
-                                    textInputAction: TextInputAction.send,
-                                    decoration: const InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 15,
-                                      ),
-                                      prefixIcon: Icon(
-                                        Icons.male_outlined,
-                                        size: 30,
-                                        color: Colors.grey,
-                                      ),
-                                      hintText: "Password",
-                                      hintStyle: TextStyle(
-                                        height: 2,
-                                        color: Color(0xffDDDADA),
-                                        fontSize: 15,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
-                                        ),
-                                        borderSide: BorderSide(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Forgot password?",
-                                  style: context.bodyMedium,
-                                ),
-                                const Gap(10),
-                                GestureDetector(
-                                  onTap: () {
-                                    // context.go("/register");
-                                  },
-                                  child: Text(
-                                    "Click here",
-                                    style: context.bodyMedium!.copyWith(
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Colors.grey,
-                                      decorationStyle:
-                                          TextDecorationStyle.solid,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                    RegisterUserInfo(
+                      section: _section,
+                      usernameController: _usernameController,
+                      dateController: _dateController,
+                      sexController: _sexController,
+                      phoneController: _phoneController,
+                      emailController: _emailController,
                     ),
                     Visibility(
-                      visible: false,
+                      visible:
+                          _section == RegisterSection.userInfo ? false : true,
                       child: SizedBox(
-                        height: context.height * 0.23,
+                        height: context.height * 0.26,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             TextFormField(
-                              controller: _usernameController,
+                              controller: _passwordController,
                               validator: (value) {
                                 return null;
                               },
@@ -308,7 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: Colors.grey,
                                 ),
                                 prefixStyle: TextStyle(),
-                                hintText: "Username",
+                                hintText: "Password",
                                 hintStyle: TextStyle(
                                   height: 2,
                                   color: Color(0xffDDDADA),
@@ -323,7 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             TextFormField(
-                              controller: _passwordController,
+                              controller: _confirmPasswordController,
                               validator: (value) {
                                 return null;
                               },
@@ -341,7 +222,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   size: 30,
                                   color: Colors.grey,
                                 ),
-                                hintText: "Password",
+                                hintText: "Confirm Password",
                                 hintStyle: TextStyle(
                                   height: 2,
                                   color: Color(0xffDDDADA),
@@ -357,24 +238,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  "Forgot password?",
-                                  style: context.bodyMedium,
+                                Checkbox(
+                                  value: checkboxValue,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      checkboxValue = value!;
+                                    });
+                                  },
                                 ),
-                                const Gap(10),
+                                const Gap(7),
                                 GestureDetector(
                                   onTap: () {
                                     // context.go("/register");
                                   },
                                   child: Text(
-                                    "Click here",
+                                    "Remenber me",
                                     style: context.bodyMedium!.copyWith(
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Colors.grey,
-                                      decorationStyle:
-                                          TextDecorationStyle.solid,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -384,7 +265,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -398,7 +279,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // context.go("/login");
+                      if (_section == RegisterSection.userInfo) {
+                        setState(() {
+                          _section = RegisterSection.userPassword;
+                        });
+                      } else {
+                        _validateForm();
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: context.primary,
@@ -413,7 +300,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     child: Text(
-                      "Login",
+                      _section == RegisterSection.userInfo ? "Next" : "Login",
                       style: context.titleLarge!.copyWith(
                         color: context.surface,
                         fontSize: 24.0,
@@ -425,16 +312,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Don't have an account ?",
+                        "Already have an account ?",
                         style: context.bodyMedium,
                       ),
                       const Gap(10),
                       GestureDetector(
                         onTap: () {
-                          context.go("/register");
+                          context.go("/login");
                         },
                         child: Text(
-                          "Register",
+                          "Login",
                           style: context.bodyMedium!.copyWith(
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.grey,
