@@ -104,7 +104,7 @@ class IntroScreenSwitch extends StatelessWidget {
             child: page == 0
                 ? TextButton(
                     onPressed: () {
-                      context.go("/signup_or_login");
+                      context.push("/signup_or_login");
                     },
                     child: Text(
                       "Skip",
@@ -147,7 +147,7 @@ class IntroScreenSwitch extends StatelessWidget {
             child: page == 2
                 ? TextButton(
                     onPressed: () {
-                      context.go("/signup_or_login");
+                      context.push("/signup_or_login");
                     },
                     child: Text(
                       "Finish",

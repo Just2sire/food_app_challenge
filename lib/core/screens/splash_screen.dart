@@ -27,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen>
     splashScreenAnimationController.forward();
     splashScreenAnimationController.repeat(reverse: true, min: 0.7);
     Future.delayed(const Duration(milliseconds: 2000), () {
-      // wasConnected == true ? context.go("/login") :
       context.go("/introduction_screen");
     });
   }

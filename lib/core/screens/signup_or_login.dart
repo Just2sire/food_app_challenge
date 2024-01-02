@@ -39,7 +39,7 @@ class SignUpOrLogin extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      context.go("/login");
+                      context.push("/login");
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: context.primary,
@@ -63,7 +63,7 @@ class SignUpOrLogin extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      context.go("/register");
+                      context.push("/register");
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xffFBFFF9),

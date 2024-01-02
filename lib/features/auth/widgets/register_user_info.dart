@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/features/auth/widgets/register_enum.dart';
+import 'package:food_app/features/auth/widgets/enums.dart';
 import 'package:food_app/utils/build_context_extension.dart';
-import 'package:gap/gap.dart';
 
 class RegisterUserInfo extends StatelessWidget {
   const RegisterUserInfo({
@@ -209,32 +208,6 @@ class RegisterUserInfo extends StatelessWidget {
                   borderSide: BorderSide(),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Forgot password?",
-                  style: context.bodyMedium,
-                ),
-                const Gap(10),
-                GestureDetector(
-                  onTap: () {
-                    // context.go("/register");
-                  },
-                  child: Text(
-                    "Click here",
-                    style: context.bodyMedium!.copyWith(
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.grey,
-                      decorationStyle:
-                          TextDecorationStyle.solid,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
         ),
