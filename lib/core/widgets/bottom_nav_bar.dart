@@ -36,9 +36,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
     }
   }
 
-  Object getBody(selectedIndex) {
+  void getBody(selectedIndex) {
     _controller.index = selectedIndex;
-    return GoRouter.of(context).push(view(selectedIndex));
+    return GoRouter.of(context).go(view(selectedIndex));
   }
 
   @override

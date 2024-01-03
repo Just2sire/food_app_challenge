@@ -69,41 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const Gap(20),
-              SizedBox(
-                height: context.height * 0.055,
-                width: double.infinity,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return index == 0
-                        ? Gap(context.width * 0.03)
-                        : TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              backgroundColor: context.primary,
-                            ),
-                            child: Row(
-                              children: [
-                                // FaIcon(FontAwesomeIcons.bowlFood, color: Colors.white, size: 15,),
-                                const Icon(
-                                  Icons.room_service_outlined,
-                                  color: Colors.white,
-                                ),
-                                const Gap(5),
-                                Text(
-                                  "Fruits",
-                                  style: context.bodyMedium!.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                  },
-                  separatorBuilder: (context, index) => const Gap(10),
-                  itemCount: 10,
-                ),
-              ),
+              const CategorySection(),
               const Gap(20),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
@@ -125,124 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const Gap(20),
-              SizedBox(
-                height: context.height * 0.23,
-                width: double.infinity,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    Food food = foods[index];
-                    return index == 0
-                        ? Gap(context.width * 0.03)
-                        : Stack(
-                            children: [
-                              Positioned(
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  child: Image(
-                                    image: AssetImage(
-                                      "assets/foods/${food.picture}",
-                                    ),
-                                    width: context.width * 0.4,
-                                    height: context.height * 0.14,
-                                    alignment: Alignment.center,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top: context.height * 0.1,
-                                left: context.width * 0.025,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 4,
-                                    horizontal: 2,
-                                  ),
-                                  width: context.width * 0.35,
-                                  height: context.height * 0.13,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[50],
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: food.disponible
-                                                    ? context.primary
-                                                    : context.tertiary,
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 50,
-                                              // height: 50,
-                                              padding: const EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: food.disponible
-                                                    ? context.primary
-                                                    : context.tertiary,
-                                                border: Border.all(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        food.name,
-                                        style: context.bodyMedium!.copyWith(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${food.price} XOF",
-                                        style: context.bodyMedium!.copyWith(
-                                          fontSize: 12,
-                                          color: context.primary,
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          height: 23,
-                                          width: context.width * 0.15,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: context.primary,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: const Text(
-                                            "Order",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          );
-                  },
-                  separatorBuilder: (context, index) => const Gap(10),
-                  itemCount: foods.length,
-                ),
-              ),
+              const CustomerFavouriteSection(),
               const Gap(20),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
@@ -264,127 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const Gap(20),
-              SizedBox(
-                height: context.height * 0.23,
-                width: double.infinity,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    Food food = foods[index];
-                    return index == 0
-                        ? Gap(context.width * 0.03)
-                        : Stack(
-                            children: [
-                              Positioned(
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  child: Image(
-                                    image: AssetImage(
-                                      "assets/foods/${food.picture}",
-                                    ),
-                                    width: context.width * 0.4,
-                                    height: context.height * 0.14,
-                                    alignment: Alignment.center,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top: context.height * 0.1,
-                                left: context.width * 0.025,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 4,
-                                    horizontal: 2,
-                                  ),
-                                  width: context.width * 0.35,
-                                  height: context.height * 0.13,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[50],
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: food.disponible
-                                                    ? context.primary
-                                                    : context.tertiary,
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 50,
-                                              // height: 50,
-                                              padding: const EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: food.disponible
-                                                    ? context.primary
-                                                    : context.tertiary,
-                                                border: Border.all(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        food.name,
-                                        style: context.bodyMedium!.copyWith(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${food.price} XOF",
-                                        style: context.bodyMedium!.copyWith(
-                                          fontSize: 12,
-                                          color: context.primary,
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          height: 23,
-                                          width: context.width * 0.15,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: context.primary,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: const Text(
-                                            "Order",
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white),
-                                            // style: context.bodySmall!.copyWith(
-                                            //   color: Colors.white,
-                                            //   height: 8,
-                                            // ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          );
-                  },
-                  separatorBuilder: (context, index) => const Gap(10),
-                  itemCount: foods.length,
-                ),
-              ),
+              const AddRecentlySection(),
               Gap(context.height * 0.13),
             ],
           ),
@@ -496,6 +225,310 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+class AddRecentlySection extends StatelessWidget {
+  const AddRecentlySection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.height * 0.23,
+      width: double.infinity,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          Food food = foods[index];
+          return index == 0
+              ? Gap(context.width * 0.03)
+              : Stack(
+                  children: [
+                    Positioned(
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        child: Image(
+                          image: AssetImage(
+                            "assets/foods/${food.picture}",
+                          ),
+                          width: context.width * 0.4,
+                          height: context.height * 0.14,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: context.height * 0.1,
+                      left: context.width * 0.025,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 2,
+                        ),
+                        width: context.width * 0.35,
+                        height: context.height * 0.13,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[50],
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: food.disponible
+                                          ? context.primary
+                                          : context.tertiary,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    width: 50,
+                                    // height: 50,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: food.disponible
+                                          ? context.primary
+                                          : context.tertiary,
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              food.name,
+                              style: context.bodyMedium!.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              "${food.price} XOF",
+                              style: context.bodyMedium!.copyWith(
+                                fontSize: 12,
+                                color: context.primary,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                height: 23,
+                                width: context.width * 0.15,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: context.primary,
+                                  borderRadius:
+                                      BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  "Order",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.white),
+                                  // style: context.bodySmall!.copyWith(
+                                  //   color: Colors.white,
+                                  //   height: 8,
+                                  // ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                );
+        },
+        separatorBuilder: (context, index) => const Gap(10),
+        itemCount: foods.length,
+      ),
+    );
+  }
+}
+
+class CustomerFavouriteSection extends StatelessWidget {
+  const CustomerFavouriteSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.height * 0.23,
+      width: double.infinity,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          Food food = foods[index];
+          return index == 0
+              ? Gap(context.width * 0.03)
+              : Stack(
+                  children: [
+                    Positioned(
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        child: Image(
+                          image: AssetImage(
+                            "assets/foods/${food.picture}",
+                          ),
+                          width: context.width * 0.4,
+                          height: context.height * 0.14,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: context.height * 0.1,
+                      left: context.width * 0.025,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 2,
+                        ),
+                        width: context.width * 0.35,
+                        height: context.height * 0.13,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[50],
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: food.disponible
+                                          ? context.primary
+                                          : context.tertiary,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    width: 50,
+                                    // height: 50,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: food.disponible
+                                          ? context.primary
+                                          : context.tertiary,
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              food.name,
+                              style: context.bodyMedium!.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              "${food.price} XOF",
+                              style: context.bodyMedium!.copyWith(
+                                fontSize: 12,
+                                color: context.primary,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                height: 23,
+                                width: context.width * 0.15,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: context.primary,
+                                  borderRadius:
+                                      BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  "Order",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                );
+        },
+        separatorBuilder: (context, index) => const Gap(10),
+        itemCount: foods.length,
+      ),
+    );
+  }
+}
+
+class CategorySection extends StatelessWidget {
+  const CategorySection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.height * 0.055,
+      width: double.infinity,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return index == 0
+              ? Gap(context.width * 0.03)
+              : TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    backgroundColor: context.primary,
+                  ),
+                  child: Row(
+                    children: [
+                      // FaIcon(FontAwesomeIcons.bowlFood, color: Colors.white, size: 15,),
+                      const Icon(
+                        Icons.room_service_outlined,
+                        color: Colors.white,
+                      ),
+                      const Gap(5),
+                      Text(
+                        "Fruits",
+                        style: context.bodyMedium!.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+        },
+        separatorBuilder: (context, index) => const Gap(10),
+        itemCount: 10,
+      ),
+    );
+  }
+}
+
 class HomeCard extends StatelessWidget {
   const HomeCard({
     super.key,
@@ -578,12 +611,12 @@ class HomeCard extends StatelessWidget {
           ),
           Positioned(
             left: context.width * 0.45,
-            top: context.height * 0.05,
+            top: context.height * 0.045,
             child: Image(
               image: const AssetImage(
-                "assets/food_images/menu_food.jpeg",
+                "assets/food_images/menu_food.png",
               ),
-              width: context.width * 0.3,
+              width: context.width * 0.35,
             ),
           ),
         ],
