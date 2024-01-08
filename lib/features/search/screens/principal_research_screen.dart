@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/core/data/foods_data.dart';
 import 'package:food_app/core/models/food_model.dart';
 import 'package:food_app/core/widgets/bottom_nav_bar.dart';
+import 'package:food_app/features/search/widgets/custom_search_delegate.dart';
 import 'package:food_app/utils/build_context_extension.dart';
 import 'package:gap/gap.dart';
 
@@ -15,11 +16,11 @@ class SearchPrincipalScreen extends StatefulWidget {
 
 class _SearchPrincipalScreenState extends State<SearchPrincipalScreen> {
   TextEditingController searchController = TextEditingController();
-  late final GlobalKey<ScaffoldState> key;
+  // late final GlobalKey<ScaffoldState> key;
 
   @override
   void initState() {
-    key = GlobalKey();
+    // key = GlobalKey();
     super.initState();
   }
 
@@ -27,7 +28,7 @@ class _SearchPrincipalScreenState extends State<SearchPrincipalScreen> {
   Widget build(BuildContext context) {
     int notif = 1;
     return Scaffold(
-      key: key,
+      // key: key,
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -39,7 +40,7 @@ class _SearchPrincipalScreenState extends State<SearchPrincipalScreen> {
             Text(
               "Search",
               textAlign: TextAlign.left,
-              style: context.headlineMedium!.copyWith(
+              style: context.titleLarge!.copyWith(
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -114,6 +115,13 @@ class _SearchPrincipalScreenState extends State<SearchPrincipalScreen> {
                     width: context.width * 0.8,
                     child: TextField(
                       controller: searchController,
+                      keyboardType: TextInputType.none,
+                      onTap: () {
+                        showSearch(
+                          context: context,
+                          delegate: CustomSearchDelegate(),
+                        );
+                      },
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
@@ -153,7 +161,17 @@ class _SearchPrincipalScreenState extends State<SearchPrincipalScreen> {
                       showBottomSheet(
                         context: context,
                         builder: (context) {
-                          return Container();
+                          return Container(
+                            height: 100,
+                            padding: const EdgeInsets.only(right: 10),
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                          );
                         },
                       );
                     },

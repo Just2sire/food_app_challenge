@@ -9,6 +9,7 @@ import 'package:food_app/features/auth/screens/forget_password/reset_password.da
 import 'package:food_app/features/auth/screens/forget_password/verify_email.dart';
 import 'package:food_app/features/auth/screens/login_screen.dart';
 import 'package:food_app/features/auth/screens/register_screen.dart';
+import 'package:food_app/features/chat/screens/chat_principal_page.dart';
 import 'package:food_app/features/search/screens/principal_research_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -71,13 +72,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'chat',
           builder: (BuildContext context, GoRouterState state) {
-            return const Scaffold(
-              extendBody: true,
-              body: Center(
-                child: Text("Chat"),
-              ),
-              bottomNavigationBar: BottomNavBar(index: 1,),
-            );
+            return const ChatPage();
           },
         ),
         GoRoute(
@@ -88,7 +83,9 @@ final GoRouter router = GoRouter(
               body: Center(
                 child: Text("Add"),
               ),
-              bottomNavigationBar: BottomNavBar(index: 2,),
+              bottomNavigationBar: BottomNavBar(
+                index: 2,
+              ),
             );
           },
         ),
@@ -106,7 +103,9 @@ final GoRouter router = GoRouter(
               body: Center(
                 child: Text("Profile"),
               ),
-              bottomNavigationBar: BottomNavBar(index: 4,),
+              bottomNavigationBar: BottomNavBar(
+                index: 4,
+              ),
             );
           },
         ),
